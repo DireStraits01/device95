@@ -11,20 +11,39 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'device95-theme' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'device95-theme' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'device95-theme' ), 'device95-theme', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
+	<footer id="colophon" class="apple-footer">
+		<div class="footer-container">
+            <nav class="footer-nav">
+                <a href="#" class="footer-brand">Device95</a>
+                
+                <ul class="footer-nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-link">ВКонтакте</a>
+                    <a href="#" class="social-link">Телеграм</a>
+                    <a href="#" class="social-link">YouTube</a>
+                </div>
+            </nav>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 Device95. Все права защищены.
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy">Политика конфиденциальности</a>
+                    <a href="#terms">Условия использования</a>
+                    <a href="#cookies">Файлы cookie</a>
+                </div>
+            </div>
+        </div>
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 

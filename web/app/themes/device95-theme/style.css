@@ -458,6 +458,9 @@ big {
 /* Elements
 --------------------------------------------- */
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   background: #fff;
 }
 
@@ -1094,7 +1097,7 @@ textarea {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 18px;
     padding: 12px 0;
-    margin-top: 8px;
+    margin-top: 0;
     display: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
@@ -1115,6 +1118,171 @@ textarea {
   padding: 0 22px;
 }
 
+.apple-footer {
+  background-color: rgba(251, 251, 253, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0;
+  min-height: 44px;
+  /* Только если нужно - добавляем отступ сверху */
+  margin-top: max(0px, 100vh - var(--content-height, 0px));
+}
+
+.footer-container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  padding: 12px 0;
+}
+
+.footer-brand {
+  color: #1d1d1f !important;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.footer-nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.footer-nav-links a {
+  color: #1d1d1f !important;
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0 8px !important;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-nav-links a:hover {
+  color: #424245 !important;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.social-link {
+  color: #1d1d1f !important;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0 8px !important;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  color: #424245 !important;
+}
+
+/* Footer divider */
+.footer-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+/* Footer bottom section */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  padding: 12px 0;
+}
+
+.footer-copyright {
+  color: #1d1d1f;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.footer-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.footer-links a {
+  color: #1d1d1f !important;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0 8px !important;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #424245 !important;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 0;
+  }
+  .footer-nav-links {
+    order: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-social {
+    order: 3;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+@media (max-width: 480px) {
+  .footer-nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-social {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 /*--------------------------------------------------------------
 # Layouts
 --------------------------------------------------------------*/
