@@ -1,0 +1,245 @@
+/* Apple стили для navbar - светлая тема */
+.apple-navbar {
+    background-color: rgba(251, 251, 253, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0;
+    min-height: 44px;
+}
+
+.apple-navbar .navbar-brand {
+    color: #1d1d1f !important;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.apple-navbar .nav-link {
+    color: #1d1d1f !important;
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0 8px !important;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.apple-navbar .nav-link:hover {
+    color: #424245 !important;
+}
+
+/* Кастомный toggler button в стиле Apple */
+.apple-navbar .navbar-toggler {
+    border: none;
+    padding: 4px 8px;
+    background: transparent;
+    order: 3; /* Перемещаем в конец на мобильных */
+}
+
+.apple-navbar .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.apple-navbar .navbar-toggler-icon {
+    background-image: none;
+    width: 18px;
+    height: 18px;
+    position: relative;
+}
+
+/* Создаем гамбургер-иконку из двух линий - темные линии для светлого фона */
+.apple-navbar .navbar-toggler-icon::before,
+.apple-navbar .navbar-toggler-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 18px;
+    height: 2px;
+    background-color: #1d1d1f;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.apple-navbar .navbar-toggler-icon::before {
+    top: -3px;
+}
+
+.apple-navbar .navbar-toggler-icon::after {
+    bottom: -3px;
+}
+
+.apple-navbar .navbar-toggler-icon {
+    background-color: transparent;
+}
+
+/* Анимация закрытия (крестик) */
+.apple-navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background-color: transparent;
+}
+
+.apple-navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.apple-navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+/* Мобильное меню - белый фон */
+.apple-navbar .navbar-collapse {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: saturate(180%) blur(20px);
+    margin-top: 8px;
+    border-radius: 18px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.apple-navbar .navbar-nav {
+    gap: 8px;
+}
+
+.apple-navbar .nav-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.apple-navbar .nav-item:last-child {
+    border-bottom: none;
+}
+
+/* Мобильная навигационная структура */
+@media (max-width: 991px) {
+    .mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .mobile-icons {
+        display: flex;
+        order: 2;
+        gap: 15px; /* Увеличиваем расстояние между иконками */
+        margin-right: 15px; /* Добавляем отступ справа */
+    }
+    
+    .apple-navbar .navbar-brand {
+        order: 1;
+    }
+    
+    .apple-navbar .navbar-toggler {
+        order: 3;
+        margin-left: 0; /* Убираем автоматический отступ */
+    }
+    
+    .apple-navbar .nav-link {
+        padding: 12px 0 !important;
+        font-size: 17px !important;
+        font-weight: 400;
+        height: auto;
+        color: #1d1d1f !important;
+    }
+    
+    /* Мобильные dropdown - только по клику */
+    .apple-navbar .dropdown-menu {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        position: static;
+    }
+    
+    .apple-navbar .dropdown-item {
+        color: rgba(29, 29, 31, 0.7) !important;
+        padding: 8px 20px;
+        font-size: 15px;
+        background: transparent;
+    }
+    
+    .apple-navbar .dropdown-item:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: #1d1d1f !important;
+    }
+}
+
+/* Десктопные стили */
+@media (min-width: 992px) {
+    .apple-navbar .navbar-collapse {
+        background: transparent;
+        margin-top: 0;
+        border-radius: 0;
+        padding: 0;
+        backdrop-filter: none;
+        border: none;
+    }
+    
+    .apple-navbar .navbar-nav {
+        gap: 0;
+        flex-direction: row;
+    }
+    
+    .apple-navbar .nav-item {
+        border-bottom: none;
+    }
+    
+    .apple-navbar .nav-link {
+        font-size: 12px !important;
+        padding: 0 8px !important;
+        height: 44px;
+    }
+    
+    .apple-navbar .navbar-toggler {
+        display: none;
+    }
+    
+    .mobile-header {
+        display: contents;
+    }
+    
+    .mobile-icons {
+        display: none;
+    }
+    
+    /* Десктопные dropdown - по наведению, без стрелок */
+    .apple-navbar .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    
+    .apple-navbar .dropdown-toggle::after {
+        display: none; /* Убираем стрелки dropdown */
+    }
+    
+    .apple-navbar .dropdown-menu {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: saturate(180%) blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 18px;
+        padding: 12px 0;
+        margin-top: 8px;
+        display: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .apple-navbar .dropdown-item {
+        color: #1d1d1f;
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+    
+    .apple-navbar .dropdown-item:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #424245;
+    }
+}
+
+/* Контейнер */
+.navbar-container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 22px;
+}
+

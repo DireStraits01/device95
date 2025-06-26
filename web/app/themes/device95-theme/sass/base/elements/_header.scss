@@ -1,0 +1,404 @@
+// ==========================================================================
+// SASS Variables
+// ==========================================================================
+
+// Colors
+$primary-color: #007cba;
+$secondary-color: #333;
+$text-color: #333;
+$text-light: #666;
+$white: #fff;
+$border-color: #f0f0f0;
+$hover-bg: #555;
+
+// Typography
+$font-family-base: 'Arial', sans-serif;
+$font-size-base: 16px;
+$font-size-large: 2.5em;
+$font-size-medium: 1.1em;
+$line-height-base: 1.6;
+
+// Spacing
+$spacing-xs: 5px;
+$spacing-sm: 10px;
+$spacing-md: 15px;
+$spacing-lg: 20px;
+$spacing-xl: 30px;
+$spacing-xxl: 40px;
+
+// Breakpoints
+$mobile: 768px;
+$tablet: 1024px;
+$desktop: 1200px;
+
+// Transitions
+$transition-fast: 0.3s ease;
+
+// ==========================================================================
+// SASS Mixins
+// ==========================================================================
+
+@mixin transition($property: all, $duration: $transition-fast) {
+  transition: $property $duration;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+@mixin responsive($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+// ==========================================================================
+// Skip Link
+// ==========================================================================
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  
+  &.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    
+    &:focus {
+      background-color: #f1f1f1;
+      border-radius: 3px;
+      box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+      clip: auto !important;
+      color: #21759b;
+      display: block;
+      font-size: 14px;
+      font-size: 0.875rem;
+      font-weight: bold;
+      height: auto;
+      left: 6px;
+      line-height: normal;
+      padding: 15px 23px 14px;
+      text-decoration: none;
+      top: 7px;
+      width: auto;
+      z-index: 100000;
+    }
+  }
+}
+
+// ==========================================================================
+// Site Container
+// ==========================================================================
+
+#page.site {
+  max-width: $desktop;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  
+  @include responsive($mobile) {
+    padding: 0 $spacing-md;
+  }
+}
+
+// ==========================================================================
+// Header Styles
+// ==========================================================================
+
+#masthead.site-header {
+  background-color: $white;
+  padding: $spacing-lg 0;
+  border-bottom: 2px solid $border-color;
+  margin-bottom: $spacing-xl;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  @include responsive($mobile) {
+    padding: $spacing-md 0;
+    margin-bottom: $spacing-lg;
+  }
+  
+  // Site Branding
+  .site-branding {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    
+    @include responsive($mobile) {
+      margin-bottom: $spacing-md;
+    }
+    
+    // Custom Logo
+    .custom-logo {
+      max-height: 80px;
+      width: auto;
+      margin-bottom: $spacing-sm;
+    }
+    
+    // Site Title
+    .site-title {
+      margin: 0;
+      font-size: $font-size-large;
+      font-weight: bold;
+      line-height: 1.2;
+      
+      @include responsive($mobile) {
+        font-size: 2em;
+      }
+      
+      @include responsive(480px) {
+        font-size: 1.8em;
+      }
+      
+      a {
+        text-decoration: none;
+        color: $text-color;
+        @include transition(color);
+        
+        &:hover,
+        &:focus {
+          color: $primary-color;
+        }
+      }
+    }
+    
+    // Site Description
+    .site-description {
+      margin: $spacing-sm 0 0 0;
+      font-size: $font-size-medium;
+      color: $text-light;
+      font-style: italic;
+      font-weight: 300;
+      
+      @include responsive($mobile) {
+        font-size: 1em;
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// Navigation Styles
+// ==========================================================================
+
+#site-navigation.main-navigation {
+  background-color: $secondary-color;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  
+  // Menu Toggle Button (Mobile)
+  .menu-toggle {
+    @include button-reset;
+    display: none;
+    background: $secondary-color;
+    color: $white;
+    padding: $spacing-md $spacing-lg;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    @include transition(background-color);
+    
+    &:hover,
+    &:focus {
+      background-color: $hover-bg;
+    }
+    
+    &::after {
+      content: '\25BC';
+      float: right;
+      font-size: 12px;
+      @include transition(transform);
+    }
+    
+    &[aria-expanded="true"]::after {
+      transform: rotate(180deg);
+    }
+  }
+  
+  // Navigation Menu
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    @include responsive($mobile) {
+      display: none;
+      flex-direction: column;
+    }
+    
+    li {
+      position: relative;
+      
+      a {
+        display: block;
+        padding: $spacing-md $spacing-lg;
+        text-decoration: none;
+        color: $white;
+        font-weight: 500;
+        @include transition(background-color);
+        
+        &:hover,
+        &:focus {
+          background-color: $hover-bg;
+        }
+        
+        &:focus {
+          outline: 2px solid $primary-color;
+          outline-offset: -2px;
+        }
+      }
+      
+      // Dropdown indicator
+      &.menu-item-has-children > a::after {
+        content: '\25BC';
+        margin-left: $spacing-xs;
+        font-size: 10px;
+      }
+    }
+    
+    // Dropdown Menus
+    ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: $secondary-color;
+      min-width: 200px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: none;
+      z-index: 1000;
+      
+      li {
+        width: 100%;
+        
+        a {
+          padding: $spacing-sm $spacing-md;
+          border-bottom: 1px solid $hover-bg;
+          
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+      
+      // Show dropdown on hover
+      li:hover & {
+        display: block;
+      }
+    }
+  }
+  
+  // Mobile Navigation States
+  @include responsive($mobile) {
+    .menu-toggle {
+      display: block;
+    }
+    
+    &.toggled ul {
+      display: flex;
+    }
+    
+    ul {
+      li a {
+        padding: $spacing-sm $spacing-lg;
+        border-bottom: 1px solid $hover-bg;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+      
+      // Mobile dropdown
+      ul {
+        position: static;
+        box-shadow: none;
+        display: block;
+        background-color: $hover-bg;
+        
+        li a {
+          padding-left: $spacing-xl;
+        }
+      }
+    }
+  }
+}
+
+// ==========================================================================
+// Accessibility Improvements
+// ==========================================================================
+
+// Focus styles
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid $primary-color;
+  outline-offset: 2px;
+}
+
+// Screen reader text
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  
+  &:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #21759b;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    height: auto;
+    left: 6px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 7px;
+    width: auto;
+    z-index: 100000;
+  }
+}
+
+// ==========================================================================
+// Animation Enhancements
+// ==========================================================================
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-header {
+  animation: fadeInDown 0.6s ease-out;
+}
+
+// Smooth scroll behavior
+html {
+  scroll-behavior: smooth;
+}
