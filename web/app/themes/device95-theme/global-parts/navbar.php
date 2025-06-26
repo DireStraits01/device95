@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg apple-navbar fixed-top">
-    <div class="container-fluid navbar-container">
+    <div class="container-fluid navbar-container pt-4">
         <!-- Мобильная структура -->
         <div class="mobile-header d-lg-none">
             <!-- Бренд слева -->
