@@ -1,0 +1,182 @@
+/* Apple-style WBW (WooBeWoo) Filter Styling */
+.filters-sidebar{
+    background-color: red !important;
+}
+.filters-sidebar {
+    background: rgba(251, 251, 253, 0.8) !important;
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 18px !important;
+    padding: 20px !important;
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    margin-bottom: 20px !important;
+}
+
+/* Filter Titles */
+.wpf-filter-title,
+.wbw-filter-title h3,
+.wbw-filter-title h4 {
+    color: #1d1d1f !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    margin-bottom: 12px !important;
+    margin-top: 0 !important;
+}
+
+/* Filter Blocks */
+.wpf-filter-block,
+.wbw-filter-block {
+    margin-bottom: 20px !important;
+    padding-bottom: 16px !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.wpf-filter-block:last-child,
+.wbw-filter-block:last-child {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+}
+
+/* Checkboxes and Options */
+.wpf-filter-checkbox,
+.wpf-filter-radio,
+.wbw-filter-checkbox {
+    margin-bottom: 8px !important;
+}
+
+.wpf-filter-checkbox label,
+.wpf-filter-radio label,
+.wbw-filter-checkbox label {
+    color: #1d1d1f !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    transition: color 0.3s ease !important;
+    padding: 4px 0 !important;
+}
+
+.wpf-filter-checkbox label:hover,
+.wpf-filter-radio label:hover,
+.wbw-filter-checkbox label:hover {
+    color: #007aff !important;
+}
+
+.wpf-filter-checkbox input,
+.wpf-filter-radio input,
+.wbw-filter-checkbox input {
+    margin-right: 8px !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* Price Range Filter */
+.wpf-price-filter,
+.wbw-price-filter {
+    margin: 12px 0 !important;
+}
+
+.wpf-price-range input,
+.wbw-price-range input {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    color: #1d1d1f !important;
+    width: 80px !important;
+    margin: 0 8px !important;
+}
+
+.wpf-price-range input:focus,
+.wbw-price-range input:focus {
+    outline: none !important;
+    border-color: #007aff !important;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1) !important;
+}
+
+/* Dropdown Selects */
+.wpf-filter select,
+.wbw-filter select {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    color: #1d1d1f !important;
+    width: 100% !important;
+    cursor: pointer !important;
+}
+
+/* Filter Buttons */
+.wpf-submit-button,
+.wpf-reset-button,
+.wbw-submit-button,
+.wbw-reset-button {
+    background: #007aff !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin-right: 8px !important;
+    margin-top: 12px !important;
+}
+
+.wpf-submit-button:hover,
+.wbw-submit-button:hover {
+    background: #0056cc !important;
+    transform: translateY(-1px) !important;
+}
+
+.wpf-reset-button,
+.wbw-reset-button {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #1d1d1f !important;
+}
+
+.wpf-reset-button:hover,
+.wbw-reset-button:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+    background-color: red;
+}
+
+/* Filter Lists */
+.wpf-filter-list,
+.wbw-filter-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.wpf-filter-list li,
+.wbw-filter-list li {
+    margin-bottom: 6px !important;
+}
+
+/* Count Numbers */
+.wpf-filter-count,
+.wbw-filter-count {
+    color: #86868b !important;
+    font-size: 12px !important;
+    margin-left: 8px !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .wbw-filter-container,
+    .wpf-filters-container {
+        padding: 16px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .wpf-filter-title,
+    .wbw-filter-title h3 {
+        font-size: 14px !important;
+    }
+}

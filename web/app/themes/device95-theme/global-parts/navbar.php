@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg apple-navbar fixed-top">
-    <div class="container-fluid navbar-container pt-4">
+    <div class="container-fluid navbar-container">
         <!-- Мобильная структура -->
         <div class="mobile-header d-lg-none">
             <!-- Бренд слева -->
@@ -38,23 +38,70 @@
                         Apple
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/телефоны-apple">iPhone</a></li>
-                        <li><a class="dropdown-item" href="/mac">Mac</a></li>
-                        <li><a class="dropdown-item" href="/apple-watch">Apple Watch</a></li>
+                        <li><a class="dropdown-item" href="/iphones">iPhone</a></li>
+                        <li><a class="dropdown-item" href="/macbook">Macbook</a></li>
+                        <li><a class="dropdown-item" href="/imac">iMac</a></li>
                         <li><a class="dropdown-item" href="/ipad">iPad</a></li>
-                        <li><a class="dropdown-item" href="/аксессуары-apple">Аксессуары Apple</a></li>
+                        <li><a class="dropdown-item" href="/airpods">AirPods</a></li>
+                        <li><a class="dropdown-item" href="/apple-watch">Apple Watch</a></li>
+                        <li><a class="dropdown-item" href="/accessories-apple">Аксессуары</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Samsung
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/samsung-smartphones">Смартфоны</a></li>
+                        <li><a class="dropdown-item" href="/samsung-notebooks">Ноутбуки</a></li>
+                        <li><a class="dropdown-item" href="/samsung-teblet">Планшекты</a></li>
+                        <li><a class="dropdown-item" href="/samsung-tv">Телевизоры</a></li>
+                        <li><a class="dropdown-item" href="/samsung-watch">Часы</a></li>
+                        <li><a class="dropdown-item" href="/samsung-headphones">Наушники</a></li>
+                        <li><a class="dropdown-item" href="/samsung-accessories">Аксессуары</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Xiaomi
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <li><a class="dropdown-item" href="/xiaomi-smartphones">Смартфоны</a></li>
+                        <li><a class="dropdown-item" href="/xiaomi-notebooks">Ноутбуки</a></li>
+                        <li><a class="dropdown-item" href="/xiaomi-tv">Телевизоры</a></li>
+                        <li><a class="dropdown-item" href="/xiaomi-tablets">Планшеты</a></li>
+                        <li><a class="dropdown-item" href="/xiaomi-watch">Часы</a></li>
+                        <li><a class="dropdown-item" href="/xiaomi-headphones">Наушники</a></li>
+                        <li><a class="dropdown-item" href="/xiaomi-accessories">Аксессуары</a></li>
                     </ul>
                 </li>
                 
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dyson
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                        <li><a class="dropdown-item" href="/dyson-vacuum-cleaners">Пылесосы</a></li>
+                        <li><a class="dropdown-item" href="/dyson-hair-dryers">Фены</a></li>
+                        <li><a class="dropdown-item" href="/dyson-air-purifiers">Очистители воздуха</a></li>
+                        <li><a class="dropdown-item" href="/dyson-fans">Вентиляторы</a></li>
+                        <li><a class="dropdown-item" href="/dyson-hair-stylers">Стайлеры для волос</a></li>
+                        <li><a class="dropdown-item" href="/dyson-accessories">Аксессуары</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Смартфоны
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <li><a class="dropdown-item" href="/samsung">Apple</a></li>
                         <li><a class="dropdown-item" href="/samsung">Samsung</a></li>
                         <li><a class="dropdown-item" href="/xiaomi">Xiaomi</a></li>
                         <li><a class="dropdown-item" href="/huawei">Huawei</a></li>
-                        <li><a class="dropdown-item" href="/аксессуары-телефонов">Аксессуары для телефонов</a></li>
+                        <li><a class="dropdown-item" href="/oppo">Oppo</a></li>
+                        <li><a class="dropdown-item" href="/smartphones-accessories">Аксессуары</a></li>
                     </ul>
                 </li>
                 
@@ -69,28 +116,16 @@
                         <li><a class="dropdown-item" href="/комплектующие">Комплектующие для ПК</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Наушники
+                    <a class="nav-link" href="#" id="navbarDropdown8" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Фото и видео
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                        <li><a class="dropdown-item" href="/беспроводные-наушники">Беспроводные наушники</a></li>
-                        <li><a class="dropdown-item" href="/проводные-наушники">Проводные наушники</a></li>
-                        <li><a class="dropdown-item" href="/игровые-гарнитуры">Игровые гарнитуры</a></li>
-                        <li><a class="dropdown-item" href="/аксессуары-наушников">Аксессуары для наушников</a></li>
-                    </ul>
-                </li>
-                
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Power Bank и зарядки
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
-                        <li><a class="dropdown-item" href="/power-bank">Power Bank</a></li>
-                        <li><a class="dropdown-item" href="/беспроводные-зарядки">Беспроводные зарядки</a></li>
-                        <li><a class="dropdown-item" href="/сетевые-зарядки">Сетевые зарядки</a></li>
-                        <li><a class="dropdown-item" href="/кабели">Кабели для зарядки</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown8">
+                        <li><a class="dropdown-item" href="/телевизоры">Телевизоры</a></li>
+                        <li><a class="dropdown-item" href="/фотоаппараты">Фотоаппараты</a></li>
+                        <li><a class="dropdown-item" href="/видеокамеры">Видеокамеры</a></li>
+                        <li><a class="dropdown-item" href="/проекторы">Проекторы</a></li>
                     </ul>
                 </li>
                 
@@ -99,6 +134,7 @@
                         Аудио
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
+                        <li><a class="dropdown-item" href="/наушники">Наушники</a></li>
                         <li><a class="dropdown-item" href="/колонки">Колонки</a></li>
                         <li><a class="dropdown-item" href="/саундбары">Саундбары</a></li>
                         <li><a class="dropdown-item" href="/микрофоны">Микрофоны</a></li>
@@ -115,18 +151,7 @@
                         <li><a class="dropdown-item" href="/планшеты">Планшеты</a></li>
                         <li><a class="dropdown-item" href="/игровые-консоли">Игровые консоли</a></li>
                         <li><a class="dropdown-item" href="/vr-устройства">VR-устройства</a></li>
-                    </ul>
-                </li>
-                
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown8" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Фото и видео
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown8">
-                        <li><a class="dropdown-item" href="/телевизоры">Телевизоры</a></li>
-                        <li><a class="dropdown-item" href="/фотоаппараты">Фотоаппараты</a></li>
-                        <li><a class="dropdown-item" href="/видеокамеры">Видеокамеры</a></li>
-                        <li><a class="dropdown-item" href="/проекторы">Проекторы</a></li>
+                        <li><a class="dropdown-item" href="/повербанки">Повербанки</a></li>
                     </ul>
                 </li>
                 

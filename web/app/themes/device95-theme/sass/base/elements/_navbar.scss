@@ -243,3 +243,11 @@
     padding: 0 22px;
 }
 
+
+//
+.woocommerce .products .product {
+    background-color: rgba(251, 251, 253, 0.8) !important;
+    backdrop-filter: saturate(180%) blur(20px);
+    border-radius: 18px !important;
+    /* ... rest of Apple styling */
+}
