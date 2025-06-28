@@ -4,6 +4,7 @@ get_header();
 
 // Get category from URL parameter or page slug
 $category = '';
+$brand = '';
 $page_title = '';
 $page_description = '';
 $filter_id = 1; // Default filter ID
@@ -26,16 +27,18 @@ if (empty($category)) {
             'filter_id' => 1
         ),
         'iphones' => array(
-            'category' => 'iphones',
+            'category' => 'smartphones',
+            'brand' => 'Apple',
             'title' => 'Телефоны Apple',
             'description' => 'Выберите свой идеальный iPhone',
             'filter_id' => 4
         ),
-        'samsung' => array(
-            'category' => 'samsung',
+        'samsung-smartphones' => array(
+            'category' => 'smartphones',
+            'brand' => 'Samsung',
             'title' => 'Телефоны Samsung', 
             'description' => 'Выберите свой идеальный Samsung',
-            'filter_id' => 4
+            'filter_id' => 1
         ),
         'headphones' => array(
             'category' => 'headphones',
@@ -53,6 +56,7 @@ if (empty($category)) {
     
     if (isset($category_map[$page_slug])) {
         $category = $category_map[$page_slug]['category'];
+        $bran = $category_map[$page_slug]['brand'];
         $page_title = $category_map[$page_slug]['title'];
         $page_description = $category_map[$page_slug]['description'];
         $filter_id = $category_map[$page_slug]['filter_id'];
@@ -88,9 +92,13 @@ if (empty($page_title)) {
         <!-- Products Grid -->
         <div class="col-md-9">
             <?php if (!empty($category)) : ?>
-                <?php echo do_shortcode('[products category="' . $category . '" limit="12" columns="3"]'); ?>
-            <?php else : ?>
-                <p style="text-align: center; color: #86868b;">Категория товаров не найдена.</p>
+                <?php 
+                if (!empty($brand)) {
+                    echo do_shortcode('[products category="' . $category . '" attribute="brand" terms="' . strtolower($brand) . '" limit="12" columns="3"]');
+                } else {
+                    echo do_shortcode('[products category="' . $category . '" limit="12" columns="3"]');
+                }
+                ?>
             <?php endif; ?>
         </div>
     </div>
