@@ -33,11 +33,16 @@
                     </a>
                 </li>
                 
+                <!-- Apple -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/apple" id="navbarDropdownApple" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Apple
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownApple">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/apple"><strong>Все продукты Apple</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/iphones">iPhone</a></li>
                         <li><a class="dropdown-item" href="/macbook">Macbook</a></li>
                         <li><a class="dropdown-item" href="/imac">iMac</a></li>
@@ -48,14 +53,19 @@
                     </ul>
                 </li>
 
+                <!-- Samsung -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/samsung" id="navbarDropdownSamsung" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Samsung
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownSamsung">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/samsung"><strong>Все продукты Samsung</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/samsung-smartphones">Смартфоны</a></li>
                         <li><a class="dropdown-item" href="/samsung-notebooks">Ноутбуки</a></li>
-                        <li><a class="dropdown-item" href="/samsung-teblet">Планшекты</a></li>
+                        <li><a class="dropdown-item" href="/samsung-tablets">Планшеты</a></li>
                         <li><a class="dropdown-item" href="/samsung-tv">Телевизоры</a></li>
                         <li><a class="dropdown-item" href="/samsung-watch">Часы</a></li>
                         <li><a class="dropdown-item" href="/samsung-headphones">Наушники</a></li>
@@ -63,11 +73,16 @@
                     </ul>
                 </li>
 
+                <!-- Xiaomi -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/xiaomi" id="navbarDropdownXiaomi" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Xiaomi
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownXiaomi">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/xiaomi"><strong>Все продукты Xiaomi</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/xiaomi-smartphones">Смартфоны</a></li>
                         <li><a class="dropdown-item" href="/xiaomi-notebooks">Ноутбуки</a></li>
                         <li><a class="dropdown-item" href="/xiaomi-tv">Телевизоры</a></li>
@@ -78,11 +93,16 @@
                     </ul>
                 </li>
                 
+                <!-- Dyson -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/dyson" id="navbarDropdownDyson" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Dyson
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownDyson">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/dyson"><strong>Все продукты Dyson</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/dyson-vacuum-cleaners">Пылесосы</a></li>
                         <li><a class="dropdown-item" href="/dyson-hair-dryers">Фены</a></li>
                         <li><a class="dropdown-item" href="/dyson-air-purifiers">Очистители воздуха</a></li>
@@ -91,25 +111,36 @@
                         <li><a class="dropdown-item" href="/dyson-accessories">Аксессуары</a></li>
                     </ul>
                 </li>
+
+                <!-- Смартфоны -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/smartphones" id="navbarDropdownSmartphones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Смартфоны
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                        <li><a class="dropdown-item" href="/samsung">Apple</a></li>
-                        <li><a class="dropdown-item" href="/samsung">Samsung</a></li>
-                        <li><a class="dropdown-item" href="/xiaomi">Xiaomi</a></li>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownSmartphones">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/smartphones"><strong>Все смартфоны</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
+                        <li><a class="dropdown-item" href="/iphones">Apple</a></li>
+                        <li><a class="dropdown-item" href="/samsung-smartphones">Samsung</a></li>
+                        <li><a class="dropdown-item" href="/xiaomi-smartphones">Xiaomi</a></li>
                         <li><a class="dropdown-item" href="/huawei">Huawei</a></li>
                         <li><a class="dropdown-item" href="/oppo">Oppo</a></li>
                         <li><a class="dropdown-item" href="/smartphones-accessories">Аксессуары</a></li>
                     </ul>
                 </li>
                 
+                <!-- Компьютеры -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/computers" id="navbarDropdownComputers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Компьютеры
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownComputers">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/computers"><strong>Все компьютеры</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/ноутбуки">Ноутбуки</a></li>
                         <li><a class="dropdown-item" href="/пк">Настольные ПК</a></li>
                         <li><a class="dropdown-item" href="/мониторы">Мониторы</a></li>
@@ -117,11 +148,16 @@
                     </ul>
                 </li>
 
+                <!-- Фото и видео -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown8" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/photo-video" id="navbarDropdownPhoto" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Фото и видео
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown8">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownPhoto">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/photo-video"><strong>Фото и видео</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/телевизоры">Телевизоры</a></li>
                         <li><a class="dropdown-item" href="/фотоаппараты">Фотоаппараты</a></li>
                         <li><a class="dropdown-item" href="/видеокамеры">Видеокамеры</a></li>
@@ -129,11 +165,16 @@
                     </ul>
                 </li>
                 
+                <!-- Аудио -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown6" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/audio" id="navbarDropdownAudio" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Аудио
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownAudio">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/audio"><strong>Все аудио</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/наушники">Наушники</a></li>
                         <li><a class="dropdown-item" href="/колонки">Колонки</a></li>
                         <li><a class="dropdown-item" href="/саундбары">Саундбары</a></li>
@@ -142,11 +183,16 @@
                     </ul>
                 </li>
                 
+                <!-- Гаджеты -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown7" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/gadgets" id="navbarDropdownGadgets" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Гаджеты
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown7">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownGadgets">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/gadgets"><strong>Все гаджеты</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/умные-часы">Умные часы</a></li>
                         <li><a class="dropdown-item" href="/планшеты">Планшеты</a></li>
                         <li><a class="dropdown-item" href="/игровые-консоли">Игровые консоли</a></li>
@@ -155,11 +201,16 @@
                     </ul>
                 </li>
                 
+                <!-- Техника для дома -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown9" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link" href="/home-appliances" id="navbarDropdownHome" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Техника для дома
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown9">
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownHome">
+                        <li class="d-lg-none"><a class="dropdown-item" href="/home-appliances"><strong>Вся техника для дома</strong></a></li>
+                        <li class="d-lg-none"><hr class="dropdown-divider"></li>
+                        
                         <li><a class="dropdown-item" href="/кофемашины">Кофемашины</a></li>
                         <li><a class="dropdown-item" href="/пылесосы">Пылесосы</a></li>
                         <li><a class="dropdown-item" href="/фены">Фены</a></li>

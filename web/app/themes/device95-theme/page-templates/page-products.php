@@ -4,7 +4,6 @@ get_header();
 
 // Get category from URL parameter or page slug
 $category = '';
-$brand = '';
 $page_title = '';
 $page_description = '';
 $filter_id = 1; // Default filter ID
@@ -27,15 +26,13 @@ if (empty($category)) {
             'filter_id' => 1
         ),
         'iphones' => array(
-            'category' => 'smartphones',
-            'brand' => 'Apple',
+            'category' => 'smartphones, apple',
             'title' => 'Телефоны Apple',
             'description' => 'Выберите свой идеальный iPhone',
             'filter_id' => 4
         ),
         'samsung-smartphones' => array(
-            'category' => 'smartphones',
-            'brand' => 'Samsung',
+            'category' => 'smartphones, samsung',
             'title' => 'Телефоны Samsung', 
             'description' => 'Выберите свой идеальный Samsung',
             'filter_id' => 1
@@ -56,7 +53,6 @@ if (empty($category)) {
     
     if (isset($category_map[$page_slug])) {
         $category = $category_map[$page_slug]['category'];
-        $bran = $category_map[$page_slug]['brand'];
         $page_title = $category_map[$page_slug]['title'];
         $page_description = $category_map[$page_slug]['description'];
         $filter_id = $category_map[$page_slug]['filter_id'];
@@ -93,12 +89,10 @@ if (empty($page_title)) {
         <div class="col-md-9">
             <?php if (!empty($category)) : ?>
                 <?php 
-                if (!empty($brand)) {
-                    echo do_shortcode('[products category="' . $category . '" attribute="brand" terms="' . strtolower($brand) . '" limit="12" columns="3"]');
-                } else {
-                    echo do_shortcode('[products category="' . $category . '" limit="12" columns="3"]');
-                }
+                    echo do_shortcode('[products category="' . $category .'" cat_operator="AND" limit="12" columns="3"]');
                 ?>
+            <?php else : ?>
+                <p style="text-align: center; color: #86868b;">Категория товаров не найдена.</p>
             <?php endif; ?>
         </div>
     </div>

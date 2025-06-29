@@ -1006,6 +1006,20 @@ textarea {
   border-bottom: none;
 }
 
+/* Контейнер */
+.navbar-container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.woocommerce .products .product {
+  background-color: rgba(251, 251, 253, 0.8) !important;
+  backdrop-filter: saturate(180%) blur(20px);
+  border-radius: 18px !important;
+  /* ... rest of Apple styling */
+}
+
 /* Мобильная навигационная структура */
 @media (max-width: 991px) {
   .mobile-header {
@@ -1112,20 +1126,32 @@ textarea {
     color: #424245;
   }
 }
-/* Контейнер */
-.navbar-container {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 22px;
+@media (min-width: 992px) {
+  .navbar-nav .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  /* Remove mobile-only items on desktop */
+  .navbar-nav .d-lg-none {
+    display: none !important;
+  }
+  /* Desktop: Disable Bootstrap dropdown behavior, enable direct links */
+  .navbar-nav .dropdown > a[data-bs-toggle=dropdown] {
+    pointer-events: auto !important;
+  }
+  /* Prevent Bootstrap dropdown from interfering with link clicks */
+  .navbar-nav .dropdown > a[data-bs-toggle=dropdown]:focus {
+    outline: none;
+  }
 }
-
-.woocommerce .products .product {
-  background-color: rgba(251, 251, 253, 0.8) !important;
-  backdrop-filter: saturate(180%) blur(20px);
-  border-radius: 18px !important;
-  /* ... rest of Apple styling */
+/* Mobile: Prevent navigation, show dropdown on click */
+@media (max-width: 991.98px) {
+  .navbar-nav .dropdown > a {
+    pointer-events: none; /* Disable link click */
+  }
+  .navbar-nav .dropdown > a[data-bs-toggle] {
+    pointer-events: auto; /* Enable dropdown toggle */
+  }
 }
-
 .apple-footer {
   background-color: rgba(251, 251, 253, 0.8);
   backdrop-filter: saturate(180%) blur(20px);
