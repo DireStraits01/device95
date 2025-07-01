@@ -196,3 +196,9 @@ function enqueue_font_awesome() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
 
+// Update cart count with AJAX
+add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_cart_count_fragment');
+function woocommerce_cart_count_fragment($fragments) {
+    $fragments['.cart-count'] = '<span class="cart-count">' . WC()->cart->get_cart_contents_count() . '</span>';
+    return $fragments;
+}

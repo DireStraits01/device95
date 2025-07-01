@@ -141,7 +141,7 @@
                         <li class="d-lg-none"><a class="dropdown-item" href="/computers"><strong>Все компьютеры</strong></a></li>
                         <li class="d-lg-none"><hr class="dropdown-divider"></li>
                         
-                        <li><a class="dropdown-item" href="/ноутбуки">Ноутбуки</a></li>
+                        <li><a class="dropdown-item" href="/laptops">Ноутбуки</a></li>
                         <li><a class="dropdown-item" href="/пк">Настольные ПК</a></li>
                         <li><a class="dropdown-item" href="/мониторы">Мониторы</a></li>
                         <li><a class="dropdown-item" href="/комплектующие">Комплектующие для ПК</a></li>
@@ -227,6 +227,7 @@
                 <li class="nav-item d-none d-lg-block">
                     <a class="nav-link" href="/cart">
                         <i class="fas fa-shopping-bag" style="color: #1d1d1f; font-size: 18px;"></i>
+                        <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                     </a>
                 </li>
             </ul>

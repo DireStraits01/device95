@@ -125,6 +125,29 @@
     /* ... rest of Apple styling */
 }
 
+// cart icons 
+
+.cart-count {
+    position: absolute;
+    top: 2px;
+    right: -6px;
+    background: #ff3b30;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+}
+
+.nav-link {
+    position: relative;
+}
+
 /* Мобильная навигационная структура */
 @media (max-width: 991px) {
     .mobile-header {
