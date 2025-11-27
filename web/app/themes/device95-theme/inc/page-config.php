@@ -17,12 +17,12 @@ function get_page_config() {
             'description' => 'Выберите свой идеальный смартфон'
         ),
         'iphones' => array(
-            'category' => 'apple',
+            'category' => 'apple, iphones',
             'title' => 'Телефоны Apple',
             'description' => 'Выберите свой идеальный iPhone'
         ),
-        'macbook' => array(
-            'category' => 'apple, notebooks, computers',
+        'macbooks' => array(
+            'category' => 'apple, notebooks, computers, mackbooks',
             'title' => 'MacBook',
             'description' => 'Выберите свой идеальный MacBook'
         ),

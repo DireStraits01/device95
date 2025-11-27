@@ -742,16 +742,29 @@
     margin-bottom: 20px;
 }
 
+.wc-block-components-main{
+	background-color: #fafafa !important;
+	margin-right: 4px;
+	padding: 16px;
+}
+
 .wc-block-components-sidebar{
 	background-color: #fafafa !important;
 	padding: 16px;
+	height: auto !important;
+    min-height: unset !important;
+    flex-grow: 0 !important; /* Prevent flexbox stretching */
+    align-self: flex-start !important; /* Align to top instead of stretching */
 }
 
 .wc-block-components-button{
 	background-color: #222222 !important;
+	text-decoration: none !important;
 	color: #d7d7d5 !important;
 }
 
-.wc-block-components-button__text{
-	text-decoration: none;
+.wc-block-components-product-name{
+	text-decoration: none !important;
+	font-weight: 700;
+	color:#222222 !important;
 }
