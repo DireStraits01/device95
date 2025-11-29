@@ -197,8 +197,42 @@ function enqueue_font_awesome() {
 add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
 
 // Update cart count with AJAX
-add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_cart_count_fragment');
-function woocommerce_cart_count_fragment($fragments) {
-    $fragments['.cart-count'] = '<span class="cart-count">' . WC()->cart->get_cart_contents_count() . '</span>';
-    return $fragments;
+// Force cart count update on page load
+add_action('wp_footer', 'force_cart_count_update');
+function force_cart_count_update() {
+    ?>
+    <script>
+    jQuery(document).ready(function($) {
+        // Function to update cart
+        function updateCartCount() {
+            $.post('<?php echo admin_url('admin-ajax.php'); ?>', {
+                action: 'get_cart_count'
+            }, function(count) {
+                $('.cart-count-badge').text(count);
+                console.log("Cart updated to:", count);
+            });
+        }
+        
+        // Update when page loads
+        updateCartCount();
+        
+        // Update when cart changes
+        $(document.body).on('added_to_cart removed_from_cart updated_wc_div updated_cart_totals', function() {
+            console.log("Cart changed!");
+            updateCartCount();
+        });
+        
+        // Also check every 1 seconds (backup)
+        setInterval(updateCartCount, 1000);
+    });
+    </script>
+    <?php
+}
+
+// Get cart count
+add_action('wp_ajax_get_cart_count', 'ajax_get_cart_count');
+add_action('wp_ajax_nopriv_get_cart_count', 'ajax_get_cart_count');
+function ajax_get_cart_count() {
+    echo WC()->cart->get_cart_contents_count();
+    die();
 }

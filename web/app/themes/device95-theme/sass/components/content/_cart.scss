@@ -352,6 +352,44 @@
     backdrop-filter: blur(8px);
 }
 
+/* Modern Checkout Button - Apple Style */
+.wc-block-cart__submit-button {
+    width: 100% !important;
+    background: #0071e3 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 16px 24px !important;
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    letter-spacing: -0.022em !important;
+    box-shadow: none !important;
+    text-decoration: none !important; /* ← This too */
+}
+
+.wc-block-cart__submit-button:hover {
+    background: #0077ED !important;
+    transform: none !important;
+}
+
+/* Product Name - Apple Style */
+.wc-block-components-product-name,
+.wc-block-components-product-name a {
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    color: #1d1d1f !important;
+    text-decoration: none !important;
+    line-height: 1.4 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif !important;
+    letter-spacing: -0.022em !important;
+    transition: color 0.2s ease !important;
+}
+
+.wc-block-components-product-name a:hover {
+    color: #0066cc !important;
+    text-decoration: none !important;
+}
 /* ========================================
    MOBILE STYLES (for phones)
    ======================================== */

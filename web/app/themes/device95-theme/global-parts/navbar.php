@@ -10,8 +10,9 @@
                 <a class="nav-link" href="/search">
                     <i class="fa-solid fa-magnifying-glass" style="color: #1d1d1f; font-size: 18px;"></i>
                 </a>
-                <a class="nav-link" href="/cart">
+                <a class="nav-link cart-icon" href="/cart">
                     <i class="fas fa-shopping-bag" style="color: #1d1d1f; font-size: 18px;"></i>
+                    <span class="cart-count-badge"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                 </a>
             </div>
             
@@ -227,7 +228,7 @@
                 <li class="nav-item d-none d-lg-block">
                     <a class="nav-link" href="/cart">
                         <i class="fas fa-shopping-bag" style="color: #1d1d1f; font-size: 18px;"></i>
-                        <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+                        <span class="cart-count-badge"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                     </a>
                 </li>
             </ul>
