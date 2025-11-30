@@ -236,3 +236,87 @@ function ajax_get_cart_count() {
     echo WC()->cart->get_cart_contents_count();
     die();
 }
+
+// Show delivery method in SHIPPING section (after address)
+add_action('woocommerce_admin_order_data_after_shipping_address', 'show_delivery_method_in_order');
+function show_delivery_method_in_order($order) {
+    $delivery_method = $order->get_meta('_delivery_method');
+    
+    if ($delivery_method) {
+        echo '<div style="margin-top: 20px; padding: 15px; background: #f0f0f1; border-left: 4px solid #2271b1;">';
+        echo '<h3 style="margin: 0 0 10px 0;">Способ получения</h3>';
+        echo '<p style="margin: 0; font-size: 16px; font-weight: bold;">';
+        
+        if ($delivery_method == 'Доставка') {
+            echo '🚚 ' . $delivery_method;
+        } else {
+            echo '📦 ' . $delivery_method;
+        }
+        
+        echo '</p>';
+        echo '</div>';
+    }
+}
+
+// Remove billing address from payment section
+add_filter('woocommerce_order_formatted_billing_address', 'remove_billing_address_display', 10, 2);
+function remove_billing_address_display($address, $order) {
+    // Return empty array to hide address
+    return array();
+}
+
+// Register custom order statuses
+add_action('init', 'register_custom_order_statuses');
+function register_custom_order_statuses() {
+    register_post_status('wc-awaiting-confirm', array(
+        'label' => 'Ожидается подтверждения',
+        'public' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => _n_noop('Ожидается подтверждения <span class="count">(%s)</span>', 'Ожидается подтверждения <span class="count">(%s)</span>')
+    ));
+    
+    register_post_status('wc-preparing', array(
+        'label' => 'Собираем заказ',
+        'public' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => _n_noop('Собираем заказ <span class="count">(%s)</span>', 'Собираем заказ <span class="count">(%s)</span>')
+    ));
+    
+    register_post_status('wc-courier', array(
+        'label' => 'Курьер в пути',
+        'public' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => _n_noop('Курьер в пути <span class="count">(%s)</span>', 'Курьер в пути <span class="count">(%s)</span>')
+    ));
+    
+    register_post_status('wc-ready-pickup', array(
+        'label' => 'Ожидает выдачи',
+        'public' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => _n_noop('Ожидает выдачи <span class="count">(%s)</span>', 'Ожидает выдачи <span class="count">(%s)</span>')
+    ));
+}
+
+// Add custom statuses to order status list
+add_filter('wc_order_statuses', 'add_custom_order_statuses');
+function add_custom_order_statuses($order_statuses) {
+    $new_statuses = array();
+    
+    // Add awaiting confirmation
+    $new_statuses['wc-awaiting-confirm'] = 'Ожидается подтверждения заказа';
+    
+    // Add preparing
+    $new_statuses['wc-preparing'] = 'Собираем заказ';
+    
+    // Add courier
+    $new_statuses['wc-courier'] = 'Курьер в пути';
+    
+    // Add ready for pickup
+    $new_statuses['wc-ready-pickup'] = 'Заказ ожидает выдачи';
+    
+    // Keep default completed and cancelled
+    $new_statuses['wc-completed'] = 'Заказ выполнен';
+    $new_statuses['wc-cancelled'] = 'Заказ отменён';
+    
+    return $new_statuses;
+}

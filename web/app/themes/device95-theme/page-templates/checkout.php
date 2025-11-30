@@ -1,15 +1,88 @@
 <?php
 /**
- * The template for displaying product archives
- */
-
-get_header();
-?>
-
-<?php
-/**
  * Template Name: Checkout
  */
+
+// Process checkout form
+if (isset($_POST['checkout_nonce']) && wp_verify_nonce($_POST['checkout_nonce'], 'custom_checkout_process')) {
+    
+    // Get form data
+    $email = sanitize_email($_POST['billing_email']);
+    $phone = sanitize_text_field($_POST['billing_phone']);
+    $delivery_method = sanitize_text_field($_POST['delivery_method']);
+    
+    // Create order
+    $order = wc_create_order();
+    
+    // Add cart items to order
+    foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+        $product = $cart_item['data'];
+        $order->add_product($product, $cart_item['quantity']);
+    }
+    
+    // Set billing info
+    $order->set_billing_email($email);
+    $order->set_billing_phone($phone);
+    
+    if ($delivery_method === 'delivery') {
+        // Delivery address
+        $order->set_billing_first_name(sanitize_text_field($_POST['billing_first_name']));
+        $order->set_billing_last_name(sanitize_text_field($_POST['billing_last_name']));
+        $order->set_billing_city(sanitize_text_field($_POST['billing_city']));
+        $order->set_billing_address_1(sanitize_text_field($_POST['billing_address_1']) . ', дом ' . sanitize_text_field($_POST['billing_house']));
+        $order->set_billing_postcode(sanitize_text_field($_POST['billing_postcode']));
+        $order->set_billing_country('RU');
+        
+        // Save shipping address
+        $order->set_shipping_first_name(sanitize_text_field($_POST['billing_first_name']));
+        $order->set_shipping_last_name(sanitize_text_field($_POST['billing_last_name']));
+        $order->set_shipping_city(sanitize_text_field($_POST['billing_city']));
+        $order->set_shipping_address_1(sanitize_text_field($_POST['billing_address_1']) . ', дом ' . sanitize_text_field($_POST['billing_house']));
+        $order->set_shipping_postcode(sanitize_text_field($_POST['billing_postcode']));
+        $order->set_shipping_country('RU');
+        
+        // Add note
+        $order->add_order_note('🚚 Способ получения: ДОСТАВКА');
+        
+        // Save delivery method as meta data (THIS IS NEW!)
+        $order->update_meta_data('_delivery_method', 'Доставка');
+        $order->update_meta_data('_delivery_type', 'delivery');
+        
+    } else {
+        // Pickup
+        $pickup_name = sanitize_text_field($_POST['pickup_name']);
+        $order->set_billing_first_name($pickup_name);
+        $order->set_billing_address_1('Москва, Сущёвский Вал 5с20, офис N-4');
+        $order->set_billing_city('Москва');
+        $order->set_billing_postcode('127018');
+        $order->set_billing_country('RU');
+        
+        // Add notes
+        $order->add_order_note('📦 Способ получения: САМОВЫВОЗ');
+        $order->add_order_note('Адрес самовывоза: г. Москва, Сущёвский Вал 5с20, офис N-4');
+        $order->add_order_note('Имя получателя: ' . $pickup_name);
+        
+        // Save delivery method as meta data (THIS IS NEW!)
+        $order->update_meta_data('_delivery_method', 'Самовывоз');
+        $order->update_meta_data('_delivery_type', 'pickup');
+    }
+    
+    // Calculate totals
+    $order->calculate_totals();
+    
+    // Save order
+    $order->save();
+    
+    // Get order ID
+    $order_id = $order->get_id();
+    
+    // Clear cart
+    WC()->cart->empty_cart();
+    
+    // Redirect to thank you page
+    wp_redirect(home_url('/thank-you/?order=' . $order_id));
+    exit;
+}
 
 get_header();
 ?>
@@ -28,7 +101,7 @@ get_header();
                     
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="billing_email" required>
+                        <input type="email" name="billing_email">
                     </div>
                     
                     <div class="form-group">
@@ -79,7 +152,7 @@ get_header();
                         
                         <div class="form-group">
                             <label>Почтовый индекс</label>
-                            <input type="text" name="billing_postcode" required>
+                            <input type="text" name="billing_postcode">
                         </div>
                     </div>
                     
@@ -96,14 +169,14 @@ get_header();
                         
                         <div class="form-group" style="margin-top: 20px;">
                             <label>Имя <span class="required">*</span></label>
-                            <input type="text" name="pickup_name" required>
+                            <input type="text" name="pickup_name">
                         </div>
                     </div>
                 </div>
                 
-                <input type="hidden" name="delivery_method" id="delivery-method" value="delivery">
+                <input type="hidden" name="delivery_method" id="delivery-method" value="delivery" formnovalidate>
                 
-                <button type="submit" class="submit-button">
+                <button type="submit" class="submit-button" >
                     Оформить заказ
                 </button>
                 
@@ -168,7 +241,5 @@ jQuery(document).ready(function($) {
     });
 });
 </script>
-
-<?php get_footer(); ?>
 
 <?php get_footer(); ?>
