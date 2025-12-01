@@ -297,26 +297,13 @@ function register_custom_order_statuses() {
     ));
 }
 
-// Add custom statuses to order status list
+//Add custom statuses to order status list
 add_filter('wc_order_statuses', 'add_custom_order_statuses');
 function add_custom_order_statuses($order_statuses) {
-    $new_statuses = array();
+    $order_statuses['wc-awaiting-confirm'] = 'Ожидается подтверждения заказа';
+    $order_statuses['wc-preparing'] = 'Собираем заказ';
+    $order_statuses['wc-courier'] = 'Курьер в пути';
+    $order_statuses['wc-ready-pickup'] = 'Заказ ожидает выдачи';
     
-    // Add awaiting confirmation
-    $new_statuses['wc-awaiting-confirm'] = 'Ожидается подтверждения заказа';
-    
-    // Add preparing
-    $new_statuses['wc-preparing'] = 'Собираем заказ';
-    
-    // Add courier
-    $new_statuses['wc-courier'] = 'Курьер в пути';
-    
-    // Add ready for pickup
-    $new_statuses['wc-ready-pickup'] = 'Заказ ожидает выдачи';
-    
-    // Keep default completed and cancelled
-    $new_statuses['wc-completed'] = 'Заказ выполнен';
-    $new_statuses['wc-cancelled'] = 'Заказ отменён';
-    
-    return $new_statuses;
+    return $order_statuses;
 }

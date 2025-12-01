@@ -9,6 +9,7 @@ if (isset($_POST['checkout_nonce']) && wp_verify_nonce($_POST['checkout_nonce'],
     // Get form data
     $email = sanitize_email($_POST['billing_email']);
     $phone = sanitize_text_field($_POST['billing_phone']);
+    $client_name= sanitize_text_field($_POST['billing_client_name']);
     $delivery_method = sanitize_text_field($_POST['delivery_method']);
     
     // Create order
@@ -21,28 +22,41 @@ if (isset($_POST['checkout_nonce']) && wp_verify_nonce($_POST['checkout_nonce'],
     }
     
     // Set billing info
+    $order->set_billing_first_name($client_name);
     $order->set_billing_email($email);
     $order->set_billing_phone($phone);
     
     if ($delivery_method === 'delivery') {
         // Delivery address
-        $order->set_billing_first_name(sanitize_text_field($_POST['billing_first_name']));
-        $order->set_billing_last_name(sanitize_text_field($_POST['billing_last_name']));
+        $order->add_order_note('Имя получателя: ' . $client_name);
         $order->set_billing_city(sanitize_text_field($_POST['billing_city']));
-        $order->set_billing_address_1(sanitize_text_field($_POST['billing_address_1']) . ', дом ' . sanitize_text_field($_POST['billing_house']));
+        $apartment = !empty($_POST['billing_apartment']) ? ', кв./оф. ' . sanitize_text_field($_POST['billing_apartment']) : '';
+        $order->set_billing_address_1(sanitize_text_field($_POST['billing_address_1']) . ', дом ' . sanitize_text_field($_POST['billing_house']) . $apartment);
         $order->set_billing_postcode(sanitize_text_field($_POST['billing_postcode']));
         $order->set_billing_country('RU');
         
         // Save shipping address
-        $order->set_shipping_first_name(sanitize_text_field($_POST['billing_first_name']));
-        $order->set_shipping_last_name(sanitize_text_field($_POST['billing_last_name']));
         $order->set_shipping_city(sanitize_text_field($_POST['billing_city']));
-        $order->set_shipping_address_1(sanitize_text_field($_POST['billing_address_1']) . ', дом ' . sanitize_text_field($_POST['billing_house']));
+        $order->set_shipping_address_1(sanitize_text_field($_POST['billing_address_1']) . ', дом ' . sanitize_text_field($_POST['billing_house']) . $apartment);
         $order->set_shipping_postcode(sanitize_text_field($_POST['billing_postcode']));
         $order->set_shipping_country('RU');
         
         // Add note
         $order->add_order_note('🚚 Способ получения: ДОСТАВКА');
+
+        // Save doorbell code
+        if (!empty($_POST['doorbell_code'])) {
+            $doorbell_code = sanitize_text_field($_POST['doorbell_code']);
+            $order->add_order_note('🔔 Домофон: ' . $doorbell_code);
+            $order->update_meta_data('_doorbell_code', $doorbell_code);
+        }
+
+        // Save delivery notes
+        if (!empty($_POST['delivery_notes'])) {
+            $delivery_notes = sanitize_textarea_field($_POST['delivery_notes']);
+            $order->add_order_note('💬 Комментарий: ' . $delivery_notes);
+            $order->update_meta_data('_delivery_notes', $delivery_notes);
+        }
         
         // Save delivery method as meta data (THIS IS NEW!)
         $order->update_meta_data('_delivery_method', 'Доставка');
@@ -50,8 +64,6 @@ if (isset($_POST['checkout_nonce']) && wp_verify_nonce($_POST['checkout_nonce'],
         
     } else {
         // Pickup
-        $pickup_name = sanitize_text_field($_POST['pickup_name']);
-        $order->set_billing_first_name($pickup_name);
         $order->set_billing_address_1('Москва, Сущёвский Вал 5с20, офис N-4');
         $order->set_billing_city('Москва');
         $order->set_billing_postcode('127018');
@@ -60,7 +72,7 @@ if (isset($_POST['checkout_nonce']) && wp_verify_nonce($_POST['checkout_nonce'],
         // Add notes
         $order->add_order_note('📦 Способ получения: САМОВЫВОЗ');
         $order->add_order_note('Адрес самовывоза: г. Москва, Сущёвский Вал 5с20, офис N-4');
-        $order->add_order_note('Имя получателя: ' . $pickup_name);
+        $order->add_order_note('Имя получателя: ' . $client_name);
         
         // Save delivery method as meta data (THIS IS NEW!)
         $order->update_meta_data('_delivery_method', 'Самовывоз');
@@ -98,18 +110,22 @@ get_header();
                 <!-- Contact Information -->
                 <div class="form-section">
                     <h2 class="section-title">Контактная информация</h2>
-                    
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="billing_email">
+                        <label>Имя <span class="required">*</span></label>
+                        <input type="text" name="billing_client_name" required>
                     </div>
                     
                     <div class="form-group">
                         <label>Телефон <span class="required">*</span></label>
                         <input type="tel" name="billing_phone" required placeholder="+7 (___) ___-__-__">
                     </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="billing_email">
+                    </div>
                 </div>
-                
+
                 <!-- Delivery Method -->
                 <div class="form-section">
                     <h2 class="section-title">Способ получения</h2>
@@ -126,16 +142,6 @@ get_header();
                     <!-- Delivery Tab -->
                     <div id="delivery-tab" class="tab-content active">
                         <div class="form-group">
-                            <label>Имя <span class="required">*</span></label>
-                            <input type="text" name="billing_first_name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Фамилия <span class="required">*</span></label>
-                            <input type="text" name="billing_last_name" required>
-                        </div>
-                        
-                        <div class="form-group">
                             <label>Город <span class="required">*</span></label>
                             <input type="text" name="billing_city" required>
                         </div>
@@ -149,10 +155,20 @@ get_header();
                             <label>Номер дома <span class="required">*</span></label>
                             <input type="text" name="billing_house" required>
                         </div>
+
+                        <div class="form-group">
+                            <label>Квартира/Офис</label>
+                            <input type="text" name="billing_apartment">
+                        </div>
                         
                         <div class="form-group">
                             <label>Почтовый индекс</label>
                             <input type="text" name="billing_postcode">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Комментарий для курьера</label>
+                            <textarea name="delivery_notes" rows="3" placeholder="Например: позвоните за 10 минут, домофон не работает"></textarea>
                         </div>
                     </div>
                     
@@ -165,11 +181,6 @@ get_header();
                             <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">
                                 Режим работы: Пн-Пт 10:00-19:00
                             </p>
-                        </div>
-                        
-                        <div class="form-group" style="margin-top: 20px;">
-                            <label>Имя <span class="required">*</span></label>
-                            <input type="text" name="pickup_name">
                         </div>
                     </div>
                 </div>
@@ -232,11 +243,9 @@ jQuery(document).ready(function($) {
         
         // Toggle required fields
         if (tab === 'delivery') {
-            $('input[name="billing_first_name"], input[name="billing_last_name"], input[name="billing_city"], input[name="billing_address_1"], input[name="billing_house"], input[name="billing_postcode"]').prop('required', true);
-            $('input[name="pickup_name"]').prop('required', false);
+            $('input[name="billing_city"], input[name="billing_address_1"], input[name="billing_house"]').prop('required', true);
         } else {
             $('input[name="billing_first_name"], input[name="billing_last_name"], input[name="billing_city"], input[name="billing_address_1"], input[name="billing_house"], input[name="billing_postcode"]').prop('required', false);
-            $('input[name="pickup_name"]').prop('required', true);
         }
     });
 });
