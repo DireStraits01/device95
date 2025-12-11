@@ -1,307 +1,415 @@
-/* Apple стили для navbar - светлая тема */
-.apple-navbar {
-    background-color: rgba(251, 251, 253, 0.8);
+/* Top Bar - One Line */
+.sticky-top-bar {
+    background: rgba(251, 251, 253, 0.8);
     backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 0;
-    min-height: 44px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1001;
+    padding: 10px 0;
 }
 
-.apple-navbar .navbar-brand {
-    color: #1d1d1f !important;
-    font-weight: 600;
-    font-size: 16px;
-}
 
-.apple-navbar .nav-link {
-    color: #1d1d1f !important;
-    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    padding: 0 8px !important;
-    height: 44px;
+
+.top-bar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
     display: flex;
     align-items: center;
-    transition: color 0.3s ease;
+    justify-content: center;
+    gap: 15px;
 }
 
-.apple-navbar .nav-link:hover {
-    color: #424245 !important;
-}
-
-/* Кастомный toggler button в стиле Apple */
-.apple-navbar .navbar-toggler {
-    border: none;
-    padding: 4px 8px;
-    background: transparent;
-    order: 3; /* Перемещаем в конец на мобильных */
-}
-
-.apple-navbar .navbar-toggler:focus {
-    box-shadow: none;
-}
-
-.apple-navbar .navbar-toggler-icon {
-    background-image: none;
-    width: 18px;
-    height: 18px;
-    position: relative;
-}
-
-/* Создаем гамбургер-иконку из двух линий - темные линии для светлого фона */
-.apple-navbar .navbar-toggler-icon::before,
-.apple-navbar .navbar-toggler-icon::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 18px;
-    height: 2px;
-    background-color: #1d1d1f;
-    border-radius: 1px;
+/* Home Icon */
+.home-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1d1d1f !important;;
     transition: all 0.3s ease;
 }
 
-.apple-navbar .navbar-toggler-icon::before {
-    top: -3px;
+.home-icon:hover {
+    opacity: 0.7;
 }
 
-.apple-navbar .navbar-toggler-icon::after {
-    bottom: -3px;
+/* Burger Menu Button */
+.burger-menu-btn {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: all 0.3s ease;
 }
 
-.apple-navbar .navbar-toggler-icon {
-    background-color: transparent;
+.burger-line {
+    width: 22px;
+    height: 2px;
+    background: #1d1d1f;
+    border-radius: 2px;
+    transition: all 0.3s ease;
 }
 
-/* Анимация закрытия (крестик) */
-.apple-navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-    background-color: transparent;
+.burger-menu-btn:hover .burger-line {
+     opacity: 0.7;
 }
 
-.apple-navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
-    transform: rotate(45deg);
-    top: 0;
+.burger-menu-btn.active .burger-line:nth-child(1) {
+    transform: rotate(45deg) translateY(7px);
 }
 
-.apple-navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
-    transform: rotate(-45deg);
-    bottom: 0;
+.burger-menu-btn.active .burger-line:nth-child(2) {
+    opacity: 0;
 }
 
-/* Мобильное меню - белый фон */
-.apple-navbar .navbar-collapse {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: saturate(180%) blur(20px);
-    margin-top: 8px;
-    border-radius: 18px;
-    padding: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+.burger-menu-btn.active .burger-line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-7px);
 }
 
-.apple-navbar .navbar-nav {
-    gap: 8px;
+/* Search Box */
+.top-bar-search {
+    flex: 1;
+    max-width: 600px;
 }
 
-.apple-navbar .nav-item {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+.top-bar-search form {
+    display: flex;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.apple-navbar .nav-item:last-child {
-    border-bottom: none;
+.top-bar-search input {
+    flex: 1;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 24px 0 0 24px;
+    font-size: 14px;
+    outline: none;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
 }
 
-/* Контейнер */
-.navbar-container {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 0 22px;
+.search-button {
+    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    border-radius: 0 24px 24px 0;
+    cursor: pointer;
 }
 
-//
-.woocommerce .products .product {
-    background-color: rgba(251, 251, 253, 0.8) !important;
-    backdrop-filter: saturate(180%) blur(20px);
-    border-radius: 18px !important;
-    /* ... rest of Apple styling */
+.search-button i {
+    color: #1d1d1f;
+    font-size: 16px;
 }
 
-// cart icons 
+/* Top Bar Icons */
+.top-bar-icon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: #1d1d1f !important;
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+}
+
+.top-bar-icon:hover {
+    opacity: 0.7;
+}
+
+.top-bar-icon i {
+    font-size: 20px;
+}
+
+.icon-label {
+    font-size: 12px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
 
 .cart-count-badge {
     position: absolute;
-    top: 2px;
-    right: -6px;
+    top: 0;
+    right: 8px;
     background: #ff3b30;
     color: white;
     border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 16px;
 }
 
-.nav-link {
+/* Desktop Horizontal Menu */
+.desktop-menu {
+    background: rgba(251, 251, 253, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+// .desktop-menu.active {
+//     opacity: 1;
+//     visibility: visible;
+//     pointer-events: auto;
+//     padding: 8px 0;
+// }
+
+.desktop-menu-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    margin-top: 16px;
+}
+
+.desktop-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+     align-items: center;
+    gap: 30px;
+    margin: 0;  /* ← Added: remove default margin */
+    padding: 0;
+}
+
+.desktop-nav > ul > li {
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
-/* Мобильная навигационная структура */
-@media (max-width: 991px) {
-    .mobile-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+.desktop-nav > ul > li > a {
+    display: block;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1d1d1f;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.desktop-nav > ul > li > a:hover {
+    color: #667eea;
+}
+
+/* Desktop Submenu Dropdown */
+.desktop-nav .has-submenu:hover .submenu {
+    display: block;
+}
+
+.desktop-nav .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    padding: 12px 0;
+    min-width: 200px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    list-style: none;
+    margin: 0;
+}
+
+.desktop-nav .submenu li {
+    margin: 0;
+     list-style: none;
+}
+
+.desktop-nav .submenu a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: #1d1d1f;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.desktop-nav .submenu a:hover {
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+}
+
+/* Mobile Fullscreen Menu */
+.mobile-fullscreen-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+}
+
+.mobile-fullscreen-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-content {
+    padding: 80px 20px 40px;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav > ul > li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav > ul > li > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
+
+.mobile-nav > ul > li > a i {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.mobile-nav .has-submenu.active > a i {
+    transform: rotate(180deg);
+}
+
+/* Mobile Submenu */
+.mobile-nav .submenu {
+    padding: 0 0 15px 20px;
+    display: none;
+}
+
+.mobile-nav .submenu li {
+    margin: 8px 0;
+}
+
+.mobile-nav .submenu a {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: #86868b;
+    text-decoration: none;
+    padding: 8px 0;
+}
+
+.mobile-nav .has-submenu.active .submenu {
+    display: block;
+}
+
+body {
+    padding-top: 60px;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Desktop Only */
+@media (min-width: 769px) {
+    .burger-menu-btn {
+        display: none; // hide burger button dor desktop
+    }
+
+    .mobile-fullscreen-menu {
+        display: none;
     }
     
-    .mobile-icons {
-        display: flex;
-        order: 2;
-        gap: 15px; /* Увеличиваем расстояние между иконками */
-        margin-right: 15px; /* Добавляем отступ справа */
-    }
-    
-    .apple-navbar .navbar-brand {
-        order: 1;
-    }
-    
-    .apple-navbar .navbar-toggler {
-        order: 3;
-        margin-left: 0; /* Убираем автоматический отступ */
-    }
-    
-    .apple-navbar .nav-link {
-        padding: 12px 0 !important;
-        font-size: 17px !important;
-        font-weight: 400;
-        height: auto;
-        color: #1d1d1f !important;
-    }
-    
-    /* Мобильные dropdown - только по клику */
-    .apple-navbar .dropdown-menu {
-        background: transparent;
-        border: none;
-        box-shadow: none;
-        padding: 0;
-        margin: 0;
-        position: static;
-    }
-    
-    .apple-navbar .dropdown-item {
-        color: rgba(29, 29, 31, 0.7) !important;
-        padding: 8px 20px;
-        font-size: 15px;
-        background: transparent;
-    }
-    
-    .apple-navbar .dropdown-item:hover {
-        background: rgba(0, 0, 0, 0.05);
-        color: #1d1d1f !important;
+    .desktop-menu.active {
+        max-height: 60px;
     }
 }
 
-/* Десктопные стили */
-@media (min-width: 992px) {
-    .apple-navbar .navbar-collapse {
-        background: transparent;
-        margin-top: 0;
-        border-radius: 0;
-        padding: 0;
-        backdrop-filter: none;
-        border: none;
-    }
-    
-    .apple-navbar .navbar-nav {
-        gap: 0;
-        flex-direction: row;
-    }
-    
-    .apple-navbar .nav-item {
-        border-bottom: none;
-    }
-    
-    .apple-navbar .nav-link {
-        font-size: 12px !important;
-        padding: 0 8px !important;
-        height: 44px;
-    }
-    
-    .apple-navbar .navbar-toggler {
+/* Mobile Only */
+@media (max-width: 768px) {
+    .desktop-menu {
         display: none;
     }
     
-    .mobile-header {
-        display: contents;
+    .top-bar-search {
+        max-width: 100%;
+        flex: 1;
     }
-    
-    .mobile-icons {
+
+    .hide-icon {
         display: none;
     }
-    
-    /* Десктопные dropdown - по наведению, без стрелок */
-    .apple-navbar .nav-item.dropdown:hover .dropdown-menu {
-        display: block;
+
+    .top-bar-search input {
+        font-size: 13px;
+        padding: 8px 15px;
     }
     
-    .apple-navbar .dropdown-toggle::after {
-        display: none; /* Убираем стрелки dropdown */
-    }
-    
-    .apple-navbar .dropdown-menu {
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: saturate(180%) blur(20px);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 18px;
-        padding: 12px 0;
-        margin-top: 0;
-        display: none;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-    
-    .apple-navbar .dropdown-item {
-        color: #1d1d1f;
-        font-size: 12px;
+    .search-button {
         padding: 8px 16px;
     }
-    
-    .apple-navbar .dropdown-item:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-        color: #424245;
-    }
-}
 
-@media (min-width: 992px) {
-    .navbar-nav .dropdown:hover .dropdown-menu {
-        display: block;
+    .cart-count-badge{
+        top:-4px;
+        right: -4px;
+    }
+    .top-bar-icon,
+    .home-icon {
+        width: 36px;
+        height: 36px;
     }
     
-    /* Remove mobile-only items on desktop */
-    .navbar-nav .d-lg-none {
-        display: none !important;
+    .icon-label{
+        overflow: hidden;
+    }
+    .top-bar-icon i {
+        font-size: 18px;
     }
     
-    /* Desktop: Disable Bootstrap dropdown behavior, enable direct links */
-    .navbar-nav .dropdown > a[data-bs-toggle="dropdown"] {
-        pointer-events: auto !important;
+    .home-icon svg {
+        width: 18px;
+        height: 18px;
     }
     
-    /* Prevent Bootstrap dropdown from interfering with link clicks */
-    .navbar-nav .dropdown > a[data-bs-toggle="dropdown"]:focus {
-        outline: none;
-    }
-}
-
-/* Mobile: Prevent navigation, show dropdown on click */
-@media (max-width: 991.98px) {
-    .navbar-nav .dropdown > a {
-        pointer-events: none; /* Disable link click */
-    }
-    
-    .navbar-nav .dropdown > a[data-bs-toggle] {
-        pointer-events: auto; /* Enable dropdown toggle */
+    body {
+        padding-top: 56px;
     }
 }

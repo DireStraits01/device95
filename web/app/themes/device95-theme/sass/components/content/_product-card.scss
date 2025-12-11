@@ -8,6 +8,10 @@
     list-style: none !important;
 }
 
+form.cart {
+    display: flex;
+}
+
 .woocommerce ul.products li.product {
     background-color: rgba(251, 251, 253, 0.8) !important;
     backdrop-filter: saturate(180%) blur(20px) !important;
@@ -96,6 +100,7 @@
     text-align: center !important;
     display: block !important;
     width: 100% !important;
+    width: 50% !important;
     box-sizing: border-box !important;
 }
 
@@ -136,6 +141,17 @@
     text-decoration: none !important;
 }
 
+/* Hide all WooCommerce notices/snackbars */
+.related > h2,
+.woocommerce-message,
+.woocommerce-notice,
+.woocommerce-info,
+.woocommerce-error,
+.wc-block-components-notice-banner,
+.woocommerce-notices-wrapper {
+    display: none !important;
+}
+
 /* Better responsive breakpoints */
 @media (max-width: 1200px) {
     .woocommerce ul.products {
@@ -147,6 +163,12 @@
     .woocommerce ul.products {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
         gap: 16px !important;
+    }
+
+    form.cart {
+    
+        flex-direction: column;
+        align-items: center;
     }
 }
 

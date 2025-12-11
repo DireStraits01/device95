@@ -265,7 +265,11 @@ function remove_billing_address_display($address, $order) {
     return array();
 }
 
-// Register custom order statuses
+// ========================================
+// CUSTOM ORDER STATUSES
+// ========================================
+
+// 1. Register custom order statuses
 add_action('init', 'register_custom_order_statuses');
 function register_custom_order_statuses() {
     register_post_status('wc-awaiting-confirm', array(
@@ -297,13 +301,166 @@ function register_custom_order_statuses() {
     ));
 }
 
-//Add custom statuses to order status list
+// 2. Add custom statuses to order status list
 add_filter('wc_order_statuses', 'add_custom_order_statuses');
 function add_custom_order_statuses($order_statuses) {
-    $order_statuses['wc-awaiting-confirm'] = 'Ожидается подтверждения заказа';
+    $order_statuses['wc-awaiting-confirm'] = 'Заказ в обработке, ожидайте звонок от менеджера';
     $order_statuses['wc-preparing'] = 'Собираем заказ';
     $order_statuses['wc-courier'] = 'Курьер в пути';
     $order_statuses['wc-ready-pickup'] = 'Заказ ожидает выдачи';
     
     return $order_statuses;
+}
+
+// 3. Set default status for new orders - UPDATED VERSION
+add_action('woocommerce_new_order', 'set_default_order_status_awaiting_confirm', 20, 1);
+function set_default_order_status_awaiting_confirm($order_id) {
+    $order = wc_get_order($order_id);
+    
+    if (!$order) {
+        return;
+    }
+    
+    // Force change status to awaiting-confirm
+    $order->set_status('awaiting-confirm', 'Новый заказ - ожидается подтверждение от менеджера', true);
+    $order->save();
+}
+
+// 4. Add custom statuses to bulk actions (optional)
+add_filter('bulk_actions-edit-shop_order', 'add_custom_status_bulk_actions');
+function add_custom_status_bulk_actions($bulk_actions) {
+    $bulk_actions['mark_awaiting-confirm'] = 'Изменить статус на "Ожидается подтверждения"';
+    $bulk_actions['mark_preparing'] = 'Изменить статус на "Собираем заказ"';
+    $bulk_actions['mark_courier'] = 'Изменить статус на "Курьер в пути"';
+    $bulk_actions['mark_ready-pickup'] = 'Изменить статус на "Ожидает выдачи"';
+    
+    return $bulk_actions;
+}
+
+// 5. Make custom statuses count as "paid" (optional - if orders are already paid)
+add_filter('woocommerce_order_is_paid_statuses', 'add_custom_statuses_to_paid');
+function add_custom_statuses_to_paid($statuses) {
+    $statuses[] = 'awaiting-confirm';
+    $statuses[] = 'preparing';
+    $statuses[] = 'courier';
+    $statuses[] = 'ready-pickup';
+    
+    return $statuses;
+}
+
+
+// Track order AJAX
+add_action('wp_ajax_track_order', 'ajax_track_order');
+add_action('wp_ajax_nopriv_track_order', 'ajax_track_order');
+
+function ajax_track_order() {
+    // Check if order_id exists
+    if (!isset($_POST['order_id'])) {
+        wp_send_json_error(array('message' => 'Номер заказа не указан'));
+        return;
+    }
+    
+    $order_id = intval($_POST['order_id']);
+    
+    // Check if valid number
+    if ($order_id <= 0) {
+        wp_send_json_error(array('message' => 'Неверный формат номера заказа'));
+        return;
+    }
+    
+    // Try to get order
+    $order = wc_get_order($order_id);
+    
+    if (!$order) {
+        wp_send_json_error(array('message' => 'Заказ #' . $order_id . ' не найден'));
+        return;
+    }
+    
+    // Success!
+    $status_names = array(
+        'pending' => 'Ожидается оплата',
+        'processing' => 'Обработка',
+        'awaiting-confirm' => 'Ожидается подтверждения',
+        'preparing' => 'Собираем заказ',
+        'courier' => 'Курьер в пути',
+        'ready-pickup' => 'Ожидает выдачи',
+        'completed' => 'Выполнен',
+        'cancelled' => 'Отменён'
+    );
+    
+    $status = $order->get_status();
+    $delivery_method = $order->get_meta('_delivery_method');
+    
+    // Get address
+    $address = '';
+    if ($delivery_method === 'Доставка') {
+        // Get shipping address
+        $address_parts = array();
+        if ($order->get_shipping_city()) {
+            $address_parts[] = 'г. ' . $order->get_shipping_city();
+        }
+        if ($order->get_shipping_address_1()) {
+            $address_parts[] = $order->get_shipping_address_1();
+        }
+        if ($order->get_shipping_postcode()) {
+            $address_parts[] = 'Индекс: ' . $order->get_shipping_postcode();
+        }
+        $address = implode(', ', $address_parts);
+    } else {
+        // Pickup address
+        $address = $order->get_billing_address_1();
+    }
+    
+    // Get doorbell code and notes
+    $doorbell_code = $order->get_meta('_doorbell_code');
+    $delivery_notes = $order->get_meta('_delivery_notes');
+    
+    wp_send_json_success(array(
+        'id' => $order_id,
+        'status' => $status,
+        'status_name' => isset($status_names[$status]) ? $status_names[$status] : ucfirst($status),
+        'date' => $order->get_date_created()->date('d.m.Y H:i'),
+        'total' => strip_tags(wc_price($order->get_total())),
+        'delivery_method' => $delivery_method ? $delivery_method : 'Не указан',
+        'address' => $address ? $address : 'Не указан',
+        'doorbell_code' => $doorbell_code ? $doorbell_code : '',
+        'delivery_notes' => $delivery_notes ? $delivery_notes : ''
+    ));
+}
+
+// Remove default sorting dropdown
+remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
+
+// Add filter tabs to category pages
+add_action('woocommerce_before_shop_loop', 'add_category_filter_tabs', 25);
+function add_category_filter_tabs() {
+    if (!is_product_category()) {
+        return;
+    }
+    ?>
+    <div class="category-filter-tabs">
+        <div class="filter-tabs-container">
+            <button class="filter-tab-btn <?php echo !isset($_GET['orderby']) ? 'active' : ''; ?>" 
+                    onclick="window.location.href='<?php echo get_term_link(get_queried_object()); ?>'">
+                Все товары
+            </button>
+            <button class="filter-tab-btn <?php echo (isset($_GET['orderby']) && $_GET['orderby'] == 'popularity') ? 'active' : ''; ?>"
+                    onclick="window.location.href='<?php echo add_query_arg('orderby', 'popularity'); ?>'">
+                Популярные
+            </button>
+            <button class="filter-tab-btn <?php echo (isset($_GET['orderby']) && $_GET['orderby'] == 'date') ? 'active' : ''; ?>"
+                    onclick="window.location.href='<?php echo add_query_arg('orderby', 'date'); ?>'">
+                Новинки
+            </button>
+            <button class="filter-tab-btn <?php echo (isset($_GET['orderby']) && $_GET['orderby'] == 'price') ? 'active' : ''; ?>"
+                    onclick="window.location.href='<?php echo add_query_arg('orderby', 'price'); ?>'">
+                Дешевле
+            </button>
+            <button class="filter-tab-btn <?php echo (isset($_GET['orderby']) && $_GET['orderby'] == 'price-desc') ? 'active' : ''; ?>"
+                    onclick="window.location.href='<?php echo add_query_arg('orderby', 'price-desc'); ?>'">
+                Дороже
+            </button>
+        </div>
+    </div>
+    <?php
 }

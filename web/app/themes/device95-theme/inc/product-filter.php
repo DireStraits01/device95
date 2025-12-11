@@ -9,24 +9,12 @@ function make_complete_filter($category) {
     $category_slugs = array_map('trim', explode(',', $category));
     
     // Find products by category
-    $tax_query = array();
-    foreach ($category_slugs as $cat_slug) {
-        $tax_query[] = array(
-            'taxonomy' => 'product_cat',
-            'field'    => 'slug',
-            'terms'    => $cat_slug,
-        );
-    }
-    
     $products = wc_get_products(array(
-        'tax_query' => array(
-            'relation' => 'AND',
-            $tax_query
-        ),
+        'category' => $category_slugs,  // Simple category filter
         'limit' => -1,
         'status' => 'publish'
     ));
-    
+        
     if (empty($products)) {
         return;
     }

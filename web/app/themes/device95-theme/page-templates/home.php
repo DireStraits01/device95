@@ -18,19 +18,15 @@ get_header(); ?>
 
 get_header();
 ?>
-<!-- Hero -->
-<section class="hero-section">
-    <h1 class="hero-title">Добро пожаловать в Device95</h1>
-    <p class="hero-subtitle">Лучшие смартфоны и гаджеты по выгодным ценам</p>
-    <a href="#popular-products" class="hero-button">
-        Посмотреть товары
-    </a>
-</section>
 
-<!-- Carousel Section -->
-<section class="carousel-section">
-    <div class="carousel-container">
-        <?php echo do_shortcode('[metaslider id="196"]'); ?>
+<!-- Hero -->
+<!-- Hero with Background Image -->
+<section class="hero-section-minimal" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/hero.jpg');">
+    <div class="hero-container">
+        <p class="hero-eyebrow">Новая коллекция</p>
+        <h1 class="hero-title">Device95</h1>
+        <p class="hero-subtitle">Премиум гаджеты.<br>По честным ценам.</p>
+        <a href="<?php echo home_url('/shop?scroll=products'); ?>" class="hero-btn-minimal">Купить</a>
     </div>
 </section>
 
@@ -40,38 +36,55 @@ get_header();
         <h2 class="section-title">Доставка и самовывоз</h2>
         
         <div class="delivery-grid">
-            <div class="delivery-card">
-                <div class="delivery-icon">🚚</div>
-                <h3 class="delivery-title">Доставка по Москве</h3>
-                <p class="delivery-text">
-                    Быстрая доставка в день заказа или на следующий день
-                </p>
+            <!-- Delivery Card -->
+            <div class="delivery-card" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/delivery.jpg');">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h3 class="delivery-title">Доставка по Москве</h3>
+                    <p class="delivery-text">
+                        Быстрая доставка в день заказа или на следующий день
+                    </p>
+                </div>
             </div>
             
-            <div class="delivery-card">
-                <div class="delivery-icon">📦</div>
-                <h3 class="delivery-title">Самовывоз</h3>
-                <p class="delivery-text">
-                    г. Москва, Сущёвский Вал 5с20, офис N-4<br>
-                    Метро Савёловская<br>
-                    Пн-Пт: 10:00-19:00
-                </p>
+            <!-- Pickup Card -->
+            <div class="delivery-card" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/order.jpg');">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h3 class="delivery-title">Самовывоз</h3>
+                    <p class="delivery-text">
+                        г. Москва, Сущёвский Вал 5с20, офис N-4<br>
+                        Метро Савёловская<br>
+                        +7 (985) 315-59-59
+                    </p>
+                </div>
             </div>
             
-            <div class="delivery-card">
-                <div class="delivery-icon">💰</div>
-                <h3 class="delivery-title">Оплата наличными</h3>
-                <p class="delivery-text">
-                    Оплата при получении<br>
-                    Наличными курьеру или в офисе
-                </p>
+            <!-- Payment Card -->
+            <div class="delivery-card" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/pay.jpg');">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h3 class="delivery-title">Оплата наличными</h3>
+                    <p class="delivery-text">
+                        Оплата при получении<br>
+                        Наличными курьеру или в офисе
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Carousel Section -->
+<section class="carousel-section">
+    <div class="carousel-container">
+        <?php echo do_shortcode('[metaslider id="196"]'); ?>
+    </div>
+</section>
+
 <!-- Popular Products -->
 <section class="products-section" id="popular-products">
+      <?php woocommerce_product_loop_start(); ?>
     <h2 class="section-title">Популярные товары</h2>
     
     <div class="products-grid">
