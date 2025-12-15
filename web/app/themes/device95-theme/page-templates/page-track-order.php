@@ -30,7 +30,7 @@ get_header();
                 </button>
             </form>
             
-            <div id="order-result" style="display: none;">
+            <div id="order-result" style="display: none;" class="order-result">
                 <!-- Results will appear here -->
             </div>
         </div>
@@ -76,7 +76,7 @@ jQuery(document).ready(function($) {
                     var order = response.data;
                     var statusClass = 'status-' + order.status;
                     
-                    var html = '<div class="order-result">';
+                    var html = '';
                     html += '<span class="order-status ' + statusClass + '">' + order.status_name + '</span>';
                     html += '<div class="order-info">';
                     

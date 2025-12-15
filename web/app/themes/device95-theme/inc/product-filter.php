@@ -5,17 +5,36 @@
  */
 
 function make_complete_filter($category) {
-    // Get products from this page only
+    // Get products from this category only
     $category_slugs = array_map('trim', explode(',', $category));
     
-    // Find products by category
-    $products = wc_get_products(array(
-        'category' => $category_slugs,  // Simple category filter
+    // Get page config to check include_children setting
+    $page_slug = get_post_field('post_name', get_post());
+    $page_config = get_page_config();
+    $include_children = isset($page_config[$page_slug]['include_children']) ? $page_config[$page_slug]['include_children'] : false;
+    
+    // Build proper tax query for category
+    $args = array(
         'limit' => -1,
-        'status' => 'publish'
-    ));
+        'status' => 'publish',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'slug',
+                'terms' => $category_slugs,
+                'operator' => 'IN',
+                'include_children' => $include_children
+            )
+        )
+    );
+    
+    // Get products
+    $products = wc_get_products($args);
         
     if (empty($products)) {
+        echo '<div class="complete-filter">';
+        echo '<p style="text-align: center; color: #86868b;">Нет товаров в этой категории</p>';
+        echo '</div>';
         return;
     }
     
@@ -67,7 +86,7 @@ function make_complete_filter($category) {
     
     // Get price range
     $min_product_price = !empty($prices) ? floor(min($prices)) : 0;
-    $max_product_price = !empty($prices) ? ceil(max($prices)) : 1000;
+    $max_product_price = !empty($prices) ? ceil(max($prices)) : 100000;
     
     ?>
     
@@ -128,8 +147,8 @@ function make_complete_filter($category) {
         
         .price-input:focus {
             outline: none;
-            border-color: #007aff;
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+            border-color: #0071e3;
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
         }
         
         .price-input::placeholder {
@@ -148,22 +167,21 @@ function make_complete_filter($category) {
             align-items: center;
             gap: 10px;
             padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.03);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         
         .checkbox-label:hover {
-            background: rgba(0, 122, 255, 0.1);
-            color: #007aff;
+            background: rgba(0, 113, 227, 0.1);
         }
         
         .attribute-checkbox {
             width: 16px;
             height: 16px;
             cursor: pointer;
-            accent-color: #007aff;
+            accent-color: #0071e3;
         }
         
         .checkbox-text {
@@ -183,42 +201,66 @@ function make_complete_filter($category) {
         
         .filter-button {
             width: 100%;
-            padding: 10px 16px;
+            padding: 12px 16px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
             transition: all 0.3s ease;
             text-decoration: none;
             text-align: center;
             display: block;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
         }
         
         .apply-button {
-            background: #e3f2fd !important;
-            color: #1976d2 !important;
-            border: 1px solid #bbdefb !important;
+            background: #0071e3 !important;
+            color: white !important;
+            border: none !important;
         }
         
         .apply-button:hover {
-            background: #bbdefb !important;
-            color: #0d47a1 !important;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(25, 118, 210, 0.2);
+            background: #0077ed !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 113, 227, 0.4);
         }
         
         .clear-button {
             background: white !important;
-            color: #666 !important;
-            border: 1px solid #ddd !important;
+            color: #1d1d1f !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
         }
         
         .clear-button:hover {
-            background: #f5f5f5 !important;
-            color: #333 !important;
-            transform: translateY(-1px);
+            background: #f5f5f7 !important;
+            transform: translateY(-2px);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 991px) {
+            .complete-filter {
+                padding: 16px;
+            }
+            
+            .filter-title {
+                font-size: 16px;
+                margin-bottom: 16px;
+            }
+            
+            .filter-section {
+                margin-bottom: 16px;
+                padding-bottom: 12px;
+            }
+            
+            .checkbox-label {
+                padding: 6px 10px;
+            }
+            
+            .checkbox-text {
+                font-size: 13px;
+            }
         }
     </style>
     
@@ -237,7 +279,7 @@ function make_complete_filter($category) {
                     <input type="number" 
                            class="price-input" 
                            name="min_price" 
-                           placeholder="От <?php echo $min_product_price; ?>₽" 
+                           placeholder="От <?php echo number_format($min_product_price, 0, '', ' '); ?>₽" 
                            value="<?php echo $min_price; ?>"
                            min="<?php echo $min_product_price; ?>"
                            max="<?php echo $max_product_price; ?>">
@@ -245,7 +287,7 @@ function make_complete_filter($category) {
                     <input type="number" 
                            class="price-input" 
                            name="max_price" 
-                           placeholder="До <?php echo $max_product_price; ?>₽" 
+                           placeholder="До <?php echo number_format($max_product_price, 0, '', ' '); ?>₽" 
                            value="<?php echo $max_price; ?>"
                            min="<?php echo $min_product_price; ?>"
                            max="<?php echo $max_product_price; ?>">
@@ -267,7 +309,7 @@ function make_complete_filter($category) {
                                 <label class="checkbox-label">
                                     <input type="checkbox" 
                                            class="attribute-checkbox" 
-                                           name="<?php echo $attr_name; ?>[]" 
+                                           name="<?php echo esc_attr($attr_name); ?>[]" 
                                            value="<?php echo esc_attr($value); ?>"
                                            <?php 
                                            $selected_values = $_GET[$attr_name] ?? array();
@@ -307,10 +349,13 @@ function make_complete_filter($category) {
         const priceInputs = document.querySelectorAll('.price-input');
         const checkboxes = document.querySelectorAll('.attribute-checkbox');
         
+        // Auto-submit on desktop only
+        const isDesktop = window.innerWidth > 991;
+        
         // Price inputs - auto submit only on desktop
         priceInputs.forEach(input => {
             input.addEventListener('change', function() {
-                if (window.innerWidth > 991) {
+                if (isDesktop) {
                     setTimeout(function() {
                         form.submit();
                     }, 500);
@@ -321,7 +366,7 @@ function make_complete_filter($category) {
         // Checkboxes - auto submit only on desktop
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function() {
-                if (window.innerWidth > 991) {
+                if (isDesktop) {
                     setTimeout(function() {
                         form.submit();
                     }, 300);
@@ -336,7 +381,12 @@ function make_complete_filter($category) {
 
 // Build filtered product shortcode  
 function build_filtered_shortcode($category) {
-    // If no filters selected, show all products
+    // Get page config
+    $page_slug = get_post_field('post_name', get_post());
+    $page_config = get_page_config();
+    $include_children = isset($page_config[$page_slug]['include_children']) ? $page_config[$page_slug]['include_children'] : false;
+    
+    // Check if filters are applied
     $has_filters = false;
     foreach ($_GET as $key => $value) {
         if (!empty($value) && $key !== 'min_price' && $key !== 'max_price') {
@@ -345,22 +395,23 @@ function build_filtered_shortcode($category) {
         }
     }
     
+    // If no filters, show all products from category
     if (!$has_filters && empty($_GET['min_price']) && empty($_GET['max_price'])) {
         return '[products category="' . $category . '" limit="12" columns="3"]';
     }
     
-    // Build tax query for complex filtering
+    // Build tax query
     $tax_query = array('relation' => 'AND');
     
-    // Add category
+    // Add category filter
     $category_slugs = array_map('trim', explode(',', $category));
-    foreach ($category_slugs as $cat_slug) {
-        $tax_query[] = array(
-            'taxonomy' => 'product_cat',
-            'field'    => 'slug',
-            'terms'    => $cat_slug,
-        );
-    }
+    $tax_query[] = array(
+        'taxonomy' => 'product_cat',
+        'field' => 'slug',
+        'terms' => $category_slugs,
+        'operator' => 'IN',
+        'include_children' => $include_children
+    );
     
     // Add attribute filters
     foreach ($_GET as $key => $value) {
@@ -369,22 +420,15 @@ function build_filtered_shortcode($category) {
                 $terms = array_map('sanitize_text_field', $value);
                 $tax_query[] = array(
                     'taxonomy' => $key,
-                    'field'    => 'name',
-                    'terms'    => $terms,
-                    'operator' => 'IN'
-                );
-            } else {
-                $tax_query[] = array(
-                    'taxonomy' => $key,
-                    'field'    => 'name',
-                    'terms'    => sanitize_text_field($value),
+                    'field' => 'name',
+                    'terms' => $terms,
                     'operator' => 'IN'
                 );
             }
         }
     }
     
-    // Get products with complex query
+    // Get products
     $args = array(
         'post_type' => 'product',
         'posts_per_page' => 12,
@@ -421,11 +465,17 @@ function build_filtered_shortcode($category) {
         $args['meta_query'] = $meta_query;
     }
     
-    // Get products and create shortcode with IDs
     $products = get_posts($args);
     
     if (empty($products)) {
-        return '<p>No products found.</p>';
+        return '<div style="text-align: center; padding: 60px 20px;">
+                    <p style="font-size: 18px; color: #86868b; margin-bottom: 20px;">
+                        😔 Товары не найдены
+                    </p>
+                    <p style="font-size: 14px; color: #86868b;">
+                        Попробуйте изменить фильтры или <a href="' . get_permalink() . '" style="color: #0071e3;">сбросить все фильтры</a>
+                    </p>
+                </div>';
     }
     
     $product_ids = array();

@@ -380,7 +380,7 @@ function ajax_track_order() {
     $status_names = array(
         'pending' => 'Ожидается оплата',
         'processing' => 'Обработка',
-        'awaiting-confirm' => 'Ожидается подтверждения',
+        'awaiting-confirm' => 'Заказ в обработке, ожидайте звонок от менеджера',
         'preparing' => 'Собираем заказ',
         'courier' => 'Курьер в пути',
         'ready-pickup' => 'Ожидает выдачи',

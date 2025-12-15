@@ -117,9 +117,9 @@
                     <a href="/computers">Компьютеры</a>
                     <ul class="submenu">
                         <li><a href="/laptops">Ноутбуки</a></li>
-                        <li><a href="/пк">Настольные ПК</a></li>
-                        <li><a href="/мониторы">Мониторы</a></li>
-                        <li><a href="/комплектующие">Комплектующие</a></li>
+                        <li><a href="/pc">Настольные ПК</a></li>
+                        <li><a href="/monitors">Мониторы</a></li>
+                        <li><a href="/components">Комплектующие</a></li>
                     </ul>
                 </li>
                 
@@ -127,10 +127,10 @@
                 <li class="has-submenu">
                     <a href="/photo-video">Фото и видео</a>
                     <ul class="submenu">
-                        <li><a href="/телевизоры">Телевизоры</a></li>
-                        <li><a href="/фотоаппараты">Фотоаппараты</a></li>
-                        <li><a href="/видеокамеры">Видеокамеры</a></li>
-                        <li><a href="/проекторы">Проекторы</a></li>
+                        <li><a href="/tv">Телевизоры</a></li>
+                        <li><a href="/cameras">Фотоаппараты</a></li>
+                        <li><a href="/video-cameras">Видеокамеры</a></li>
+                        <li><a href="/projectors">Проекторы</a></li>
                     </ul>
                 </li>
                 
@@ -138,11 +138,9 @@
                 <li class="has-submenu">
                     <a href="/audio">Аудио</a>
                     <ul class="submenu">
-                        <li><a href="/audio/наушники">Наушники</a></li>
-                        <li><a href="/audio/колонки">Колонки</a></li>
-                        <li><a href="/audio/саундбары">Саундбары</a></li>
-                        <li><a href="/audio/микрофоны">Микрофоны</a></li>
-                        <li><a href="/audio/аудиосистемы">Аудиосистемы</a></li>
+                        <li><a href="/headphones">Наушники</a></li>
+                        <li><a href="/speakers">Колонки</a></li>
+                        <li><a href="/audio-systems">Аудиосистемы</a></li>
                     </ul>
                 </li>
                 
@@ -150,11 +148,11 @@
                 <li class="has-submenu">
                     <a href="/gadgets">Гаджеты</a>
                     <ul class="submenu">
-                        <li><a href="/gadgets/умные-часы">Умные часы</a></li>
-                        <li><a href="/gadgets/планшеты">Планшеты</a></li>
-                        <li><a href="/gadgets/игровые-консоли">Игровые консоли</a></li>
-                        <li><a href="/gadgets/vr-устройства">VR-устройства</a></li>
-                        <li><a href="/gadgets/повербанки">Повербанки</a></li>
+                        <li><a href="/smart-watches">Умные часы</a></li>
+                        <li><a href="/tablets">Планшеты</a></li>
+                        <li><a href="/game-consoles">Игровые консоли</a></li>
+                        <li><a href="/vr-devices">VR-устройства</a></li>
+                        <li><a href="/powerbanks">Повербанки</a></li>
                     </ul>
                 </li>
                 
@@ -162,10 +160,10 @@
                 <li class="has-submenu">
                     <a href="/home-appliances">Техника для дома</a>
                     <ul class="submenu">
-                        <li><a href="/home-appliances/кофемашины">Кофемашины</a></li>
-                        <li><a href="/home-appliances/пылесосы">Пылесосы</a></li>
-                        <li><a href="/home-appliances/фены">Фены</a></li>
-                        <li><a href="/home-appliances/кухонная-техника">Кухонная техника</a></li>
+                        <li><a href="/coffee-machines">Кофемашины</a></li>
+                        <li><a href="/vacuum-cleaners">Пылесосы</a></li>
+                        <li><a href="/hair-dryers">Фены</a></li>
+                        <li><a href="/kitchen-appliances">Кухонная техника</a></li>
                     </ul>
                 </li>
             </ul>
@@ -244,7 +242,7 @@
                         <li><a href="/huawei-smartphones">Huawei</a></li>
                         <li><a href="/oppo-smartphones">Oppo</a></li>
                          <li><a href="/other-smartphones">Остальные бренды</a></li>
-                        <li><a href="/smartphones/smartphones-accessories">Аксессуары</a></li>
+                        <li><a href="/smartphones-accessories">Аксессуары</a></li>
                     </ul>
                 </li>
                 
