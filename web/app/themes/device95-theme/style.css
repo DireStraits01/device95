@@ -3494,6 +3494,28 @@ form.cart {
     width: 100%;
   }
 }
+/* Original text stays hidden with font-size 0 */
+.wp-block-heading, .entry-title,
+.wp-block-heading.has-text-align-center.with-empty-cart-icon.wc-block-cart__empty-cart__title {
+  font-size: 0 !important;
+  line-height: 0 !important;
+  display: block !important;
+}
+
+/* Use ::after with explicit font-size */
+.wp-block-heading.has-text-align-center.with-empty-cart-icon.wc-block-cart__empty-cart__title::after {
+  content: "Ваша корзина пуста";
+  display: block;
+  font-size: 32px !important;
+  font-weight: 700;
+  color: #1d1d1f;
+  line-height: 1.2;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  text-align: center;
+  height: 100%;
+  margin: 128px;
+}
+
 .about-hero {
   background-size: cover;
   background-position: center;

@@ -11,15 +11,6 @@
 defined( 'ABSPATH' ) || exit;
 get_header(); ?>
 
-<?php
-/**
- * Template Name: Home Page
- */
-
-get_header();
-?>
-
-<!-- Hero -->
 <!-- Hero with Background Image -->
 <section class="hero-section-minimal" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/hero.jpg');">
     <div class="hero-container">
