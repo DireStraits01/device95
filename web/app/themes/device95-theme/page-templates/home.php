@@ -17,7 +17,7 @@ get_header(); ?>
         <p class="hero-eyebrow">Новая коллекция</p>
         <h1 class="hero-title">Device95</h1>
         <p class="hero-subtitle">Премиум гаджеты.<br>По честным ценам.</p>
-        <a href="<?php echo home_url('/shop?scroll=products'); ?>" class="hero-btn-minimal">Купить</a>
+        <a href="#popular-products" class="hero-btn-minimal">Купить</a>
     </div>
 </section>
 
